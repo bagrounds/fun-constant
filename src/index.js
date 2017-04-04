@@ -5,19 +5,8 @@
 ;(function () {
   'use strict'
 
-  /* imports */
-  var funAssert = require('fun-assert')
-  var guarded = require('guarded')
-  var setProp = require('set-prop')
-
-  var isFunction = funAssert.type('Function')
-
   /* exports */
-  module.exports = guarded({
-    inputs: [funAssert.pass()],
-    f: constant,
-    output: isFunction
-  })
+  module.exports = constant
 
   /**
    *
@@ -31,6 +20,10 @@
     return setProp('name', '* -> ' + value, function (anything) {
       return value
     })
+  }
+
+  function setProp (key, value, target) {
+    return Object.defineProperty(target, key, { value: value })
   }
 })()
 
